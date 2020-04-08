@@ -1,10 +1,10 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import './FloodFill.css'
+import { floodFillAlgo } from './algorithm'
 
 const FloodFill = () => {
-
-    const img = [
+    const initialImage = [
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
@@ -21,14 +21,20 @@ const FloodFill = () => {
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
     ]
-
+    const [image, setImage] = useState(initialImage)
+    const onCellClick = (a, b) => {
+        const newImage = floodFillAlgo(image, "white", [a, b])
+        setImage(newImage)
+    }
     return (
         <>
             <h1>
                 Flood Fill algorithm
-        </h1>
+            </h1>
             <table>
-                {img.map((row) => <tr>{row.map((cellColor) => <td style={{ backgroundColor: cellColor }}></td>)}</tr>)}
+                {image.map((row, a) => <tr>{row.map((cellColor, b) => <td style={{ backgroundColor: cellColor }} onClick={() => {
+                    onCellClick(a, b)
+                }}></td>)}</tr>)}
             </table>
         </>
     )
