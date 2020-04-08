@@ -23,7 +23,7 @@ const FloodFill = () => {
     ]
     const [image, setImage] = useState(initialImage)
     const onCellClick = (a, b) => {
-        const newImage = floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", [[a, b]])
+        const newImage = floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b])
         setImage(newImage)
     }
     return (
