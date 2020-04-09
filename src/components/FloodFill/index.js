@@ -2,6 +2,9 @@
 import React, { useState } from 'react'
 import './FloodFill.css'
 import { floodFillAlgo } from './algorithm'
+import Container from '../Container/index'
+import Menu from '../Menu/index'
+
 
 const FloodFill = () => {
     const initialImage = [
@@ -34,15 +37,20 @@ const FloodFill = () => {
     }
     return (
         <>
-            <h1>
-                Flood Fill algorithm
-            </h1>
-            <table>
-                {image.map((row, a) => <tr>{row.map((cellColor, b) => <td style={{ backgroundColor: cellColor }} onClick={() => {
-                    onCellClick(a, b)
-                }}></td>)}</tr>)}
-            </table>
-            {flooding && <p>Flooding...</p>}
+            <Container>
+                <h1>
+                    Flood Fill algorithm
+                </h1>
+                <div>
+                    <table>
+                        {image.map((row, a) => <tr>{row.map((cellColor, b) => <td style={{ backgroundColor: cellColor }} onClick={() => {
+                            onCellClick(a, b)
+                        }}></td>)}</tr>)}
+                    </table>
+                </div>
+                {flooding && <p>Flooding...</p>}
+            </Container>
+            <Menu></Menu>
         </>
     )
 }
