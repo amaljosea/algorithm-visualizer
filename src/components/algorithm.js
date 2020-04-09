@@ -20,7 +20,6 @@ const getValidNeibhours = (currentCoordinate, image, oldColor) => {
             !visitedArray.includes(JSON.stringify(neibourCoordinate)) &&
             !neibhoursValidArray.includes(JSON.stringify(neibourCoordinate))
         ) {
-            debugger
             neibhoursValidArray.push(JSON.stringify(neibourCoordinate))
             return true
         }
@@ -29,17 +28,15 @@ const getValidNeibhours = (currentCoordinate, image, oldColor) => {
 }
 
 export const floodFillAlgo = async (image, newColor, oldColor, coordinate, setImage) => {
-
     image[coordinate[0]][coordinate[1]] = newColor
     visitedArray.push(JSON.stringify([coordinate[0], coordinate[1]]))
     setImage(JSON.parse(JSON.stringify(image)))
     await delay(100)
 
     const newNeibhours = getValidNeibhours(coordinate, image, oldColor)
-    for (const neighCoord of newNeibhours) {
+    await Promise.all(newNeibhours.map(async (neighCoord) => {
         await delay(100)
-        floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
-    }
-    console.log("neibhoursValidArray.length", neibhoursValidArray, "visitedArray.length", visitedArray)
-    if ((neibhoursValidArray.length + 1) === visitedArray.length) return true
+        return floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
+    }))
+    return true
 }
