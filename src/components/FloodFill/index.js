@@ -28,9 +28,9 @@ const FloodFill = () => {
     const [flooding, setFlooding] = useState(false)
 
     const onCellClick = async (a, b) => {
+        if (flooding) return
         setFlooding(true)
         const finish = await floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage)
-        debugger
         if (finish) {
             setFlooding(false)
         }
