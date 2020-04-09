@@ -22,9 +22,14 @@ const FloodFill = () => {
         ["#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#f44336", "#000", "#000", "#000", "#000", "#000", "#000"],
     ]
     const [image, setImage] = useState(initialImage)
-    const onCellClick = (a, b) => {
-        const newImage = floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b])
-        setImage(newImage)
+    const [flooding, setFlooding] = useState(false)
+
+    const onCellClick = async (a, b) => {
+        setFlooding(true)
+        const finish = await floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage)
+        if (finish) {
+            setFlooding(false)
+        }
     }
     return (
         <>
@@ -36,6 +41,7 @@ const FloodFill = () => {
                     onCellClick(a, b)
                 }}></td>)}</tr>)}
             </table>
+            {flooding && <p>Flooding...</p>}
         </>
     )
 }

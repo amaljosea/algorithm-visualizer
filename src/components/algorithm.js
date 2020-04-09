@@ -12,10 +12,10 @@ const getNeibhours = (coordinate) => {
 }
 let visited = []
 
-export const floodFillAlgo = (image, newColor, oldColor, coordinate) => {
-    if (visited.includes(JSON.stringify(coordinate))) {
-        return image
-    }
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+export const floodFillAlgo = async (image, newColor, oldColor, coordinate, setImage) => {
+    if (visited.includes(JSON.stringify(coordinate))) return
     if (
         coordinate[0] < image.length &&
         coordinate[0] >= 0 &&
@@ -25,12 +25,14 @@ export const floodFillAlgo = (image, newColor, oldColor, coordinate) => {
     ) {
         image[coordinate[0]][coordinate[1]] = newColor
         visited.push(JSON.stringify([coordinate[0], coordinate[1]]))
-    } else {
-        return image
-    }
+        setImage(JSON.parse(JSON.stringify(image)))
+        await delay(50)
+    } else return
     const neibhours = getNeibhours(coordinate)
-    neibhours.forEach((neighCoord) => {
-        floodFillAlgo(image, newColor, oldColor, neighCoord)
-    })
-    return image
+
+    for (const neighCoord of neibhours) {
+        await delay(50)
+        floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
+    }
+    return true
 }
