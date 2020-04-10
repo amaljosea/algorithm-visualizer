@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import './FloodFill.css'
-import { floodFillAlgo } from './algorithm'
+import { startFloodFill } from './algorithm'
 import Container from '../Container/index'
 import Menu from '../Menu/index'
 
@@ -30,7 +30,7 @@ const FloodFill = () => {
     const onCellClick = async (a, b) => {
         if (flooding) return
         setFlooding(true)
-        const finish = await floodFillAlgo(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage)
+        const finish = await startFloodFill(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage)
         if (finish) {
             setFlooding(false)
         }

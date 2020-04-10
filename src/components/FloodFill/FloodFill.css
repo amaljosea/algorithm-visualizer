@@ -2,4 +2,5 @@ th,td{
   width: 10px;
   height: 10px;
   overflow: hidden;
+  box-shadow: 1px 1px 8px;  
 }

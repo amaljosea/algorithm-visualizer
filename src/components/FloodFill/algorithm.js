@@ -1,5 +1,4 @@
-let visitedArray = []
-let neibhoursValidArray = []
+let visitedArray = [], neibhoursValidArray = []
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 
@@ -27,16 +26,20 @@ const getValidNeibhours = (currentCoordinate, image, oldColor) => {
     return validNeighbours
 }
 
-export const floodFillAlgo = async (image, newColor, oldColor, coordinate, setImage) => {
+const floodFillAlgo = async (image, newColor, oldColor, coordinate, setImage) => {
     image[coordinate[0]][coordinate[1]] = newColor
     visitedArray.push(JSON.stringify([coordinate[0], coordinate[1]]))
     setImage(JSON.parse(JSON.stringify(image)))
     await delay(100)
-
     const newNeibhours = getValidNeibhours(coordinate, image, oldColor)
     await Promise.all(newNeibhours.map(async (neighCoord, index) => {
         await delay(100)
         return floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
     }))
     return true
+}
+export const startFloodFill = (image, newColor, oldColor, coordinate, setImage) => {
+    visitedArray = []
+    neibhoursValidArray = []
+    return floodFillAlgo(image, newColor, oldColor, coordinate, setImage)
 }
