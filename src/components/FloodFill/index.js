@@ -56,6 +56,13 @@ const FloodFill = () => {
                     <p>Dimensions {image.length} * {image.length}</p>
                 </div>
                 <div>
+                    <button onClick={() => {
+                        onDimensionChange(dimension)
+                    }}>
+                        Refresh
+                    </button>
+                </div>
+                <div>
                     <select
                         value={dimension.toString()}
                         onChange={(e) => {
