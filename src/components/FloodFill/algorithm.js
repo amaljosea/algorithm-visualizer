@@ -34,7 +34,7 @@ export const floodFillAlgo = async (image, newColor, oldColor, coordinate, setIm
     await delay(100)
 
     const newNeibhours = getValidNeibhours(coordinate, image, oldColor)
-    await Promise.all(newNeibhours.map(async (neighCoord) => {
+    await Promise.all(newNeibhours.map(async (neighCoord, index) => {
         await delay(100)
         return floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
     }))

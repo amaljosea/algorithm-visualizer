@@ -9,21 +9,23 @@ import Menu from '../Menu/index'
 const FloodFill = () => {
     const [image, setImage] = useState([[]])
     const [flooding, setFlooding] = useState(false)
+    const [dimension, setDimension] = useState(30)
 
-    const changeDimensions = (size) => {
-        const row = [], newImage = []
+    const onDimensionChange = (size) => {
+        let row = [], newImage = []
         for (let index = 0; index < size; index++) {
-            row[index] = "#000"
-        }
-        for (let index = 0; index < size; index++) {
+            row = []
+            for (let index = 0; index < size; index++) {
+                row[index] = Math.round(Math.random()) ? "#000" : "red"
+            }
             newImage[index] = row
         }
         setImage(newImage)
     }
 
     useEffect(() => {
-        changeDimensions(10)
-    }, [])
+        onDimensionChange(dimension)
+    }, [dimension])
 
     const onCellClick = async (a, b) => {
         if (flooding) return
@@ -55,14 +57,14 @@ const FloodFill = () => {
                 </div>
                 <div>
                     <select
-                        selected={10}
+                        value={dimension.toString()}
                         onChange={(e) => {
-                            changeDimensions(Number(e.target.value))
+                            setDimension(Number(e.target.value))
                         }} >
-                        <option value={10}>10</option>
-                        <option value={20}>20</option>
-                        <option value={30}>30</option>
-                        <option value={40}>40</option>
+                        <option value={"10"}>10</option>
+                        <option value={"20"}>20</option>
+                        <option value={"30"}>30</option>
+                        <option value={"40"}>40</option>
                     </select>
                 </div>
             </Menu>}
