@@ -81,9 +81,9 @@ const FloodFill = () => {
                 <div>
                     <label>Fill Type</label>
                     <select
-                        value={fillType.toString()}
+                        value={fillType}
                         onChange={(e) => {
-                            setFillType(Number(e.target.value))
+                            setFillType(e.target.value)
                         }} >
                         <option value={"RANDOM"}>RANDOM</option>
                         <option value={"PLAIN"}>PLAIN</option>
