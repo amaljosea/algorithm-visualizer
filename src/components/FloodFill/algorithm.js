@@ -30,12 +30,12 @@ const floodFillAlgo = async (image, newColor, oldColor, coordinate, setImage) =>
     image[coordinate[0]][coordinate[1]] = newColor
     visitedArray.push(JSON.stringify([coordinate[0], coordinate[1]]))
     setImage(JSON.parse(JSON.stringify(image)))
-    await delay(100)
+    await delay(10)
     const newNeibhours = getValidNeibhours(coordinate, image, oldColor)
-    await Promise.all(newNeibhours.map(async (neighCoord, index) => {
-        await delay(100)
-        return floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
-    }))
+    for (const neighCoord of newNeibhours) {
+        await delay(10)
+        await floodFillAlgo(image, newColor, oldColor, neighCoord, setImage)
+    }
     return true
 }
 export const startFloodFill = (image, newColor, oldColor, coordinate, setImage) => {
