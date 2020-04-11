@@ -7,13 +7,6 @@ const Container = ({ children }) => {
         alignItems: "center",
         height: "100%"
     }}>
-        <div style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            width: "100vw",
-        }}>
-            <a href="https://github.com/howareyouami/algorithm-visualizer" target="blank" style={{margin:10}}>github</a>
-        </div>
         {children}</div>
 }
 

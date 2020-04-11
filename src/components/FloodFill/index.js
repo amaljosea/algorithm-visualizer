@@ -4,12 +4,13 @@ import './FloodFill.css'
 import { startFloodFill } from './algorithm'
 import Container from '../Container/index'
 import Menu from '../Menu/index'
-
+import { ReactComponent as GithubLogo } from '../../images/github-logo.svg';
 
 const FloodFill = () => {
     const [image, setImage] = useState([[]])
     const [flooding, setFlooding] = useState(false)
-    const [dimension, setDimension] = useState(30)
+    const [fillType, setFillType] = useState("RANDOM")
+    const [dimension, setDimension] = useState(20)
     const [connectedNeighbours, setConnectedNeighbours] = useState(4)
 
     const onDimensionChange = (size) => {
@@ -17,7 +18,7 @@ const FloodFill = () => {
         for (let index = 0; index < size; index++) {
             row = []
             for (let index = 0; index < size; index++) {
-                row[index] = Math.round(Math.random()) ? "#000" : "red"
+                row[index] = fillType === "RANDOM" ? (Math.round(Math.random()) ? "#000" : "red") : "red"
             }
             newImage[index] = row
         }
@@ -26,12 +27,12 @@ const FloodFill = () => {
 
     useEffect(() => {
         onDimensionChange(dimension)
-    }, [dimension])
+    }, [dimension, fillType])
 
     const onCellClick = async (a, b) => {
         if (flooding) return
         setFlooding(true)
-        const finish = await startFloodFill(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage, Number(connectedNeighbours))
+        const finish = await startFloodFill(JSON.parse(JSON.stringify(image)), image[a][b] === "white" ? "#0cff0c" : "white", image[a][b], [a, b], setImage, Number(connectedNeighbours))
         if (finish) {
             setFlooding(false)
         }
@@ -40,7 +41,7 @@ const FloodFill = () => {
         <>
             <Container>
                 <h1>
-                    Flood Fill 
+                    Flood Fill
                 </h1>
                 <div>
                     <table>
@@ -54,7 +55,7 @@ const FloodFill = () => {
             </Container>
             {!flooding && <Menu>
                 <div>
-                    <label>Dimensions {image.length} * {image.length}</label>
+                    <label>Dimensions</label>
                     <select
                         value={dimension.toString()}
                         onChange={(e) => {
@@ -73,7 +74,7 @@ const FloodFill = () => {
                     </button>
                 </div>
                 <div>
-                    <label>Connected Neibhours {connectedNeighbours}</label>
+                    <label>Connected Neibhours</label>
                     <select
                         value={connectedNeighbours.toString()}
                         onChange={(e) => {
@@ -82,6 +83,22 @@ const FloodFill = () => {
                         <option value={"4"}>4</option>
                         <option value={"8"}>8</option>
                     </select>
+                </div>
+                <div>
+                    <label>Fill Type</label>
+                    <select
+                        value={fillType.toString()}
+                        onChange={(e) => {
+                            setFillType(Number(e.target.value))
+                        }} >
+                        <option value={"RANDOM"}>RANDOM</option>
+                        <option value={"PLAIN"}>PLAIN</option>
+                    </select>
+                </div>
+                <div>
+                    <a href="https://github.com/howareyouami/algorithm-visualizer" target="blank">
+                        <GithubLogo width={20} height={20} />
+                    </a>
                 </div>
             </Menu>}
         </>
