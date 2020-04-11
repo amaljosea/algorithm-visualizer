@@ -10,7 +10,8 @@ const Menu = ({ children }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "silver"
+            backgroundColor: "silver",
+            overflow: "scroll"
         }}>
         {children}
     </div>

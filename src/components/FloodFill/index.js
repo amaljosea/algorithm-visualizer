@@ -43,6 +43,7 @@ const FloodFill = () => {
                 <h1>
                     Flood Fill
                 </h1>
+                <p>Click on a tile to start.</p>
                 <div>
                     <table>
                         {image.map((row, a) => <tr>{row.map((cellColor, b) => <td style={{ backgroundColor: cellColor }}
