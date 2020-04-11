@@ -40,7 +40,7 @@ const FloodFill = () => {
         <>
             <Container>
                 <h1>
-                    Flood Fill algorithm
+                    Flood Fill 
                 </h1>
                 <div>
                     <table>
