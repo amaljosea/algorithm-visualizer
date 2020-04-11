@@ -10,6 +10,7 @@ const FloodFill = () => {
     const [image, setImage] = useState([[]])
     const [flooding, setFlooding] = useState(false)
     const [dimension, setDimension] = useState(30)
+    const [connectedNeighbours, setConnectedNeighbours] = useState(4)
 
     const onDimensionChange = (size) => {
         let row = [], newImage = []
@@ -30,7 +31,7 @@ const FloodFill = () => {
     const onCellClick = async (a, b) => {
         if (flooding) return
         setFlooding(true)
-        const finish = await startFloodFill(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage)
+        const finish = await startFloodFill(JSON.parse(JSON.stringify(image)), "white", image[a][b], [a, b], setImage, Number(connectedNeighbours))
         if (finish) {
             setFlooding(false)
         }
@@ -53,16 +54,7 @@ const FloodFill = () => {
             </Container>
             {!flooding && <Menu>
                 <div>
-                    <p>Dimensions {image.length} * {image.length}</p>
-                </div>
-                <div>
-                    <button onClick={() => {
-                        onDimensionChange(dimension)
-                    }}>
-                        Refresh
-                    </button>
-                </div>
-                <div>
+                    <label>Dimensions {image.length} * {image.length}</label>
                     <select
                         value={dimension.toString()}
                         onChange={(e) => {
@@ -72,6 +64,24 @@ const FloodFill = () => {
                         <option value={"20"}>20</option>
                         <option value={"30"}>30</option>
                         <option value={"40"}>40</option>
+                    </select>
+                </div>
+                <div>
+                    <button onClick={() => {
+                        onDimensionChange(dimension)
+                    }}>
+                        Refresh
+                    </button>
+                </div>
+                <div>
+                    <label>Connected Neibhours {connectedNeighbours}</label>
+                    <select
+                        value={connectedNeighbours.toString()}
+                        onChange={(e) => {
+                            setConnectedNeighbours(Number(e.target.value))
+                        }} >
+                        <option value={"4"}>4</option>
+                        <option value={"8"}>8</option>
                     </select>
                 </div>
             </Menu>}
