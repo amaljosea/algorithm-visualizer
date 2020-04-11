@@ -11,7 +11,8 @@ const Menu = ({ children }) => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "silver",
-            overflow: "scroll"
+            overflow: "scroll",
+            padding: "0px 50px"
         }}>
         {children}
     </div>

@@ -68,13 +68,6 @@ const FloodFill = () => {
                     </select>
                 </div>
                 <div>
-                    <button onClick={() => {
-                        onDimensionChange(dimension)
-                    }}>
-                        Refresh
-                    </button>
-                </div>
-                <div>
                     <label>Connected Neibhours</label>
                     <select
                         value={connectedNeighbours.toString()}
@@ -100,6 +93,13 @@ const FloodFill = () => {
                     <a href="https://github.com/howareyouami/algorithm-visualizer" target="blank">
                         <GithubLogo width={20} height={20} />
                     </a>
+                </div>
+                <div>
+                    <button onClick={() => {
+                        onDimensionChange(dimension)
+                    }}>
+                        Refresh
+                    </button>
                 </div>
             </Menu>}
         </>
