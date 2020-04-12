@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import './FloodFill.css'
 import { startFloodFill } from './algorithm'
-import Container from '../Container/index'
-import Menu from '../Menu/index'
+import Container from '../../components/Container/index'
+import Menu from '../../components/Menu/index'
 import { ReactComponent as GithubLogo } from '../../images/github-logo.svg';
 
 const FloodFill = () => {

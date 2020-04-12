@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import FloodFill from './components/FloodFill/index'
+import FloodFill from './pages/FloodFill/index'
 
 function App() {
   return (
