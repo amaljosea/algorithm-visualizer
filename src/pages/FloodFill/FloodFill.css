@@ -3,4 +3,5 @@ th,td{
   height: 10px;
   overflow: hidden;
   box-shadow: 1px 1px 8px;  
+  border-radius: 6px;
 }
